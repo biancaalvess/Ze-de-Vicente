@@ -1,6 +1,10 @@
-# Zé de Vicente
+# Zé de Vicente  
 
-**Zé de Vicente** is a web application developed using **HTML, CSS, JavaScript, and React**, designed to **streamline data organization and management** for institutions, events, or organizations. With a modern and intuitive interface, the system provides essential features for **registering, editing, and viewing** information efficiently.  
+
+### 🏆 About the Project  
+
+**Zé de Vicente** is a web application developed using **HTML, CSS, JavaScript, and React**, designed to **streamline data organization and management** for institutions, events, or organizations.  
+With a modern and intuitive interface, the system provides essential features for **registering, editing, and viewing** information efficiently.  
 
 ### ✨ Features  
 
@@ -16,18 +20,10 @@
 - **HTML5** – Semantic structure for better readability and SEO.  
 - **CSS3** – Modern styling for a responsive and visually appealing design.  
 
-### 🚀 How to Use  
-
-1️⃣ **Clone the repository:**  
-
-```bash
-git clone https://github.com/biancaalvess/Ze-de-Vicente.git
+---
 
 
-
- # Zé de Vicente
-
-## 🏆 Sobre o Projeto  
+### 🏆 Sobre o Projeto  
 
 **Zé de Vicente** é um aplicativo web desenvolvido com **HTML, CSS, JavaScript e React**, projetado para **simplificar a organização e gestão de dados** de instituições, eventos ou organizações.  
 Com uma interface moderna e intuitiva, o sistema oferece funcionalidades essenciais para **cadastrar, editar e visualizar** informações de forma prática e eficiente.  
@@ -45,11 +41,3 @@ Com uma interface moderna e intuitiva, o sistema oferece funcionalidades essenci
 - **JavaScript (ES6+)** – Implementa a lógica do aplicativo e manipulação de dados.  
 - **HTML5** – Estrutura semântica para melhor legibilidade e SEO.  
 - **CSS3** – Estilização moderna para um design responsivo e atrativo.  
-
-### 🚀 Como Usar  
-
-1️⃣ **Clone o repositório:**  
-
-```bash
-git clone https://github.com/biancaalvess/Ze-de-Vicente.git
-
