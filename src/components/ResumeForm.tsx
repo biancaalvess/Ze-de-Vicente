@@ -19,8 +19,6 @@ export function ResumeForm() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
   // modifica a função handleSubmit para definir a mensagem de sucesso
-
-  // Substitua a função handleSubmit existente pela seguinte:
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
