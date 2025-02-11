@@ -16,16 +16,23 @@ export function ResumeForm() {
   const [loading, setLoading] = useState(false)
   const [fileAttached, setFileAttached] = useState(false)
   // adiciona um novo estado para a mensagem de sucesso
-  const [successMessage, setSuccessMessage] = useState<string | null>(null)
+  const [successMessage, setSuccessMessage] = useState('');
 
   // modifica a função handleSubmit para definir a mensagem de sucesso
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    setSuccessMessage(null) // Limpa qualquer mensagem anterior
-
+    setSuccessMessage(
+      "Obrigado pela sua candidatura! Analisaremos seu currículo e entraremos em contato em breve."
+    );
+    setSubmitted(true);
+    
     try {
       const file = formData.resume
+      if (!file) {
+        throw new Error("Nenhum arquivo selecionado")
+      }
+
       const reader = new FileReader()
 
       reader.onload = async () => {
@@ -36,7 +43,7 @@ export function ResumeForm() {
           from_email: formData.email,
           phone: formData.phone,
           message: formData.message,
-          resume_name: file?.name,
+          resume_name: file.name,
           resume_content: base64File,
         }
 
@@ -54,12 +61,10 @@ export function ResumeForm() {
         setFileAttached(false)
       }
 
-      if (file) {
-        reader.readAsDataURL(file)
-      }
+      reader.readAsDataURL(file)
     } catch (error) {
-      alert("Erro ao enviar o currículo. Por favor, tente novamente.")
       console.error("Erro:", error)
+      setSuccessMessage("Erro ao enviar o currículo. Por favor, tente novamente.")
     } finally {
       setLoading(false)
     }
