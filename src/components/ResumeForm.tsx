@@ -35,10 +35,10 @@ export function ResumeForm() {
         };
 
         await emailjs.send(
-          'YOUR_SERVICE_ID',
-          'YOUR_TEMPLATE_ID',
+          'service_1r2k5uh',
+          'template_7k2zwrv',
           templateParams,
-          'YOUR_PUBLIC_KEY'
+          '2X30L4ABzDnc_059e'
         );
 
         setSubmitted(true);

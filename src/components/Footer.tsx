@@ -11,7 +11,7 @@ export function Footer() {
             ZÉ DE VICENTE
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4">
-            A mais de 10 anos de tradição em materiais de construção
+            A mais de 40 anos de tradição em materiais de construção
             </p>
             <div className="space-y-2 text-center text-sm text-gray-500 dark:text-gray-400">
             <p>Horário de Funcionamento:</p>
