@@ -1,6 +1,5 @@
 # **Projeto - Zé de Vicente**
 
-## **📌 Visão Geral**
 Este projeto é um sistema web desenvolvido para facilitar o recebimento de currículos para a empresa **Zé de Vicente**. Ele permite que os candidatos preencham um formulário, anexem seus currículos e enviem suas informações diretamente para a equipe de recrutamento, garantindo uma experiência intuitiva e segura.
 
 ## **🛠 Tecnologias Utilizadas**
