@@ -1,6 +1,5 @@
 # Zé de Vicente  
 
-
 ### 🏆 About the Project  
 
 **Zé de Vicente** is a web application developed using **HTML, CSS, JavaScript, TypeScript, and React**, designed to **streamline data organization and management** for institutions, events, or organizations.  
