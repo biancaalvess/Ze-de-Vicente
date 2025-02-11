@@ -1,30 +1,38 @@
-import React, { useState } from 'react';
-import { Upload } from 'lucide-react';
-import emailjs from '@emailjs/browser';
-import type { FormData } from '../types';
+import type React from "react"
+import { useState } from "react"
+import { Upload } from "lucide-react"
+import emailjs from "@emailjs/browser"
+import type { FormData } from "../types"
 
 export function ResumeForm() {
   const [formData, setFormData] = useState<FormData>({
-    fullName: '',
-    email: '',
-    phone: '',
-    message: '',
+    fullName: "",
+    email: "",
+    phone: "",
+    message: "",
     resume: null,
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  })
+  const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [fileAttached, setFileAttached] = useState(false)
+  // adiciona um novo estado para a mensagem de sucesso
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
+  // modifica a função handleSubmit para definir a mensagem de sucesso
+
+  // Substitua a função handleSubmit existente pela seguinte:
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
+    setSuccessMessage(null) // Limpa qualquer mensagem anterior
 
     try {
-      const file = formData.resume;
-      const reader = new FileReader();
-      
-      reader.onload = async function() {
-        const base64File = reader.result?.toString().split(',')[1];
-        
+      const file = formData.resume
+      const reader = new FileReader()
+
+      reader.onload = async () => {
+        const base64File = reader.result?.toString().split(",")[1]
+
         const templateParams = {
           from_name: formData.fullName,
           from_email: formData.email,
@@ -32,46 +40,54 @@ export function ResumeForm() {
           message: formData.message,
           resume_name: file?.name,
           resume_content: base64File,
-        };
+        }
 
-        await emailjs.send(
-          'service_1r2k5uh',
-          'template_7k2zwrv',
-          templateParams,
-          '2X30L4ABzDnc_059e'
-        );
+        await emailjs.send("service_1r2k5uh", "template_7k2zwrv", templateParams, "2X30L4ABzDnc_059e")
 
-        setSubmitted(true);
-      };
+        setSuccessMessage("Currículo enviado com sucesso! Agradecemos sua candidatura.")
+        // Limpa o formulário após o envio bem-sucedido
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          message: "",
+          resume: null,
+        })
+        setFileAttached(false)
+      }
 
       if (file) {
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file)
       }
     } catch (error) {
-      alert('Erro ao enviar o currículo. Por favor, tente novamente.');
-      console.error('Erro:', error);
+      alert("Erro ao enviar o currículo. Por favor, tente novamente.")
+      console.error("Erro:", error)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files?.[0]
     if (file) {
-      const fileType = file.type;
+      const fileType = file.type
       const validTypes = [
-        'application/pdf',
-        'application/msword',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-      ];
-      
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      ]
+
       if (validTypes.includes(fileType)) {
-        setFormData(prev => ({ ...prev, resume: file }));
+        setFormData((prev) => ({ ...prev, resume: file }))
+        setFileAttached(true)
       } else {
-        alert('Por favor, envie um documento PDF ou Word');
+        alert("Por favor, envie um documento PDF ou Word")
+        setFileAttached(false)
       }
+    } else {
+      setFileAttached(false)
     }
-  };
+  }
 
   if (submitted) {
     return (
@@ -90,7 +106,7 @@ export function ResumeForm() {
           Enviar Outra Candidatura
         </button>
       </div>
-    );
+    )
   }
 
   return (
@@ -107,7 +123,7 @@ export function ResumeForm() {
                     shadow-sm focus:border-[#F12E34] focus:ring-[#F12E34] 
                     dark:bg-gray-700 dark:text-white text-sm sm:text-base px-3 py-2"
           value={formData.fullName}
-          onChange={e => setFormData(prev => ({ ...prev, fullName: e.target.value }))}
+          onChange={(e) => setFormData((prev) => ({ ...prev, fullName: e.target.value }))}
         />
       </div>
 
@@ -124,7 +140,7 @@ export function ResumeForm() {
                       shadow-sm focus:border-[#F12E34] focus:ring-[#F12E34] 
                       dark:bg-gray-700 dark:text-white text-sm sm:text-base px-3 py-2"
             value={formData.email}
-            onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
+            onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
           />
         </div>
 
@@ -140,7 +156,7 @@ export function ResumeForm() {
                       shadow-sm focus:border-[#F12E34] focus:ring-[#F12E34] 
                       dark:bg-gray-700 dark:text-white text-sm sm:text-base px-3 py-2"
             value={formData.phone}
-            onChange={e => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+            onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
           />
         </div>
       </div>
@@ -156,7 +172,7 @@ export function ResumeForm() {
                     shadow-sm focus:border-[#F12E34] focus:ring-[#F12E34] 
                     dark:bg-gray-700 dark:text-white text-sm sm:text-base px-3 py-2"
           value={formData.message}
-          onChange={e => setFormData(prev => ({ ...prev, message: e.target.value }))}
+          onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
         />
       </div>
 
@@ -164,8 +180,10 @@ export function ResumeForm() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Currículo (PDF ou Word)
         </label>
-        <div className="mt-1 flex justify-center px-4 sm:px-6 pt-4 sm:pt-5 pb-4 sm:pb-6 border-2 border-gray-300 
-                      dark:border-gray-600 border-dashed rounded-md">
+        <div
+          className="mt-1 flex justify-center px-4 sm:px-6 pt-4 sm:pt-5 pb-4 sm:pb-6 border-2 border-gray-300 
+                      dark:border-gray-600 border-dashed rounded-md"
+        >
           <div className="space-y-1 text-center">
             <Upload className="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400" />
             <div className="flex flex-col sm:flex-row items-center text-sm text-gray-600 dark:text-gray-400">
@@ -187,11 +205,12 @@ export function ResumeForm() {
               </label>
               <p className="mt-2 sm:mt-0 sm:pl-1">ou arraste e solte</p>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              PDF ou Word até 10MB
-            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">PDF ou Word até 10MB</p>
           </div>
         </div>
+        {fileAttached && (
+          <p className="mt-2 text-sm text-green-600 dark:text-green-400">Currículo anexado com sucesso!</p>
+        )}
       </div>
 
       <button
@@ -201,8 +220,13 @@ export function ResumeForm() {
                   hover:bg-opacity-90 transition-colors font-medium disabled:opacity-50
                   text-sm sm:text-base"
       >
-        {loading ? 'Enviando...' : 'Enviar Candidatura'}
+        {loading ? "Enviando..." : "Enviar Candidatura"}
       </button>
+      {/*a exibição da mensagem de sucesso no JSX */}
+      {successMessage && (
+        <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">{successMessage}</div>
+      )}
     </form>
-  );
+  )
 }
+
