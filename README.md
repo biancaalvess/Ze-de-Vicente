@@ -1,6 +1,5 @@
 # Zé de Vicente  
 
-## 🌍 English Version  
 
 ### 🏆 About the Project  
 
@@ -25,7 +24,6 @@ With a modern and intuitive interface, the system provides essential features fo
 
 ---
 
-## 🇧🇷 Versão em Português  
 
 ### 🏆 Sobre o Projeto  
 
