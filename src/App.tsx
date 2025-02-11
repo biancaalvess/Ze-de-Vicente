@@ -26,7 +26,7 @@ function App() {
                 ZÉ DE VICENTE
               </h1>
               <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-2">
-                Construindo Sonhos há Mais de 50 Anos
+                Construindo Sonhos há Mais de 10 Anos
               </p>
               <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 max-w-2xl mx-auto px-4 mb-6">
                 Junte-se à nossa equipe e faça parte de uma empresa que é referência 
