@@ -30,7 +30,7 @@ function App() {
               </p>
               <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 max-w-2xl mx-auto px-4 mb-6">
                 Junte-se à nossa equipe e faça parte de uma empresa que é referência 
-                no mercado de materiais de construção há mais de cinco décadas.
+                no mercado de materiais de construção.
               </p>
               
               <SocialLinks />
