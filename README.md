@@ -24,7 +24,6 @@
 git clone https://github.com/biancaalvess/Ze-de-Vicente.git
 
 
- ----------------------------------------------
 
  # Zé de Vicente
 
