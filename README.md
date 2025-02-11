@@ -93,3 +93,61 @@ This project is a web system developed to facilitate the receipt of resumes for 
 
 ## **📜 License**
 This project is under the **MIT License**.
+
+
+ --------------
+
+
+```markdown
+# **Project - Zé de Vicente**
+
+## **📌 Overview**
+This web system is designed to streamline the resume submission process for **Zé de Vicente**. Candidates can fill out a form, upload their resumes, and submit their information directly to the recruitment team, ensuring an intuitive and secure experience.
+
+## **🛠 Technologies Used**
+
+### **Front-end:**
+- **React.js** → JavaScript library for building dynamic interfaces.
+- **TypeScript** → A statically typed superset of JavaScript.
+- **Vite.js** → Fast and optimized development build tool.
+- **Tailwind CSS** → Utility-first CSS framework for rapid styling.
+- **React Hook Form** → Efficient form management.
+- **Yup** → Schema validation and input rules.
+
+### **External Services:**
+- **EmailJS** → Email sending directly from the front-end.
+- **Netlify** → Hosting and continuous deployment.
+- **Google reCAPTCHA** → Protection against automated spam submissions.
+
+## **⚙️ Features**
+✅ **Registration Form** with real-time validation.  
+✅ **Resume Upload** (PDF/DOCX) with size restrictions.  
+✅ **EmailJS Data Submission** with user feedback.  
+✅ **Spam Protection** using Google reCAPTCHA.  
+✅ **Responsive Design** for all devices.  
+✅ **Continuous Deployment** via Netlify.  
+
+## **📂 Project Structure**
+```bash
+📂 work-with-us-project
+│── 📂 src
+│   ├── 📂 components       # Reusable components
+│   ├── 📂 utils            # Helper functions
+│   ├── 📂 styles           # Styling (Tailwind CSS)
+│   ├── App.tsx            # Main component
+│   ├── main.tsx           # React initialization
+│── 📂 public
+│── 📜 package.json         # Project dependencies
+│── 📜 vite.config.ts       # Vite.js configuration
+```
+
+## **💡 Future Improvements**
+📌 Firebase storage.  
+📌 Administrative dashboard for managing resumes.  
+📌 Email confirmation upon submission.  
+
+## **📜 License**
+This project is under the **MIT License**.
+```
+
+Isso garantirá que o texto seja exibido corretamente como código Markdown. 🚀
