@@ -47,7 +47,7 @@ export function ResumeForm() {
           resume_content: base64File,
         }
 
-        await emailjs.send("service_1r2k5uh", "template_7k2zwrv", templateParams, "2X30L4ABzDnc_059e")
+        await emailjs.send("service_1r2k5uh", "template_7k2zwrv", templateParams, "2X30L4ABzDnc_059e");
 
         setSuccessMessage("Currículo enviado com sucesso! Agradecemos sua candidatura.")
         // Limpa o formulário após o envio bem-sucedido
