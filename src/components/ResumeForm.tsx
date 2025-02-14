@@ -46,7 +46,16 @@ export function ResumeForm() {
           reply_to: "seuemail@exemplo.com"
         };
         
-        await emailjs.send("service_lpxr4an", "template_7k2zwrv", templateParams, "2X30L4ABzDnc_059e");
+        
+        emailjs.send("service_lpxr4an", "template_7k2zwrv", {
+          to_name: "Teste",
+          from_name: "Seu Nome",
+          message: "Mensagem de teste",
+          reply_to: "seuemail@exemplo.com"
+        }, "2X30L4ABzDnc_059e")
+        .then(response => console.log("✅ E-mail enviado com sucesso!", response))
+        .catch(error => console.error("❌ Erro ao enviar e-mail:", error));
+        
 
         setSuccessMessage("Currículo enviado com sucesso! Agradecemos sua candidatura.")
         // Limpa o formulário após o envio bem-sucedido
