@@ -39,6 +39,7 @@ export function ResumeForm() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const base64File = reader.result?.toString().split(",")[1]
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const templateParams = {
           to_name: "Nome do Destinatário",
           from_name: "Seu Nome",
@@ -46,15 +47,17 @@ export function ResumeForm() {
           reply_to: "seuemail@exemplo.com"
         };
         
-        
+
         emailjs.send("service_lpxr4an", "template_7k2zwrv", {
-          to_name: "Teste",
+          to_name: "Caciano",
           from_name: "Seu Nome",
           message: "Mensagem de teste",
-          reply_to: "seuemail@exemplo.com"
+          reply_to: "seuemail@exemplo.com",
+          attachment: "https://exemplo.com/curriculo.pdf" // Coloque o link correto do currículo
         }, "2X30L4ABzDnc_059e")
         .then(response => console.log("✅ E-mail enviado com sucesso!", response))
         .catch(error => console.error("❌ Erro ao enviar e-mail:", error));
+        
         
 
         setSuccessMessage("Currículo enviado com sucesso! Agradecemos sua candidatura.")
