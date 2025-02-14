@@ -36,17 +36,16 @@ export function ResumeForm() {
       const reader = new FileReader()
 
       reader.onload = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const base64File = reader.result?.toString().split(",")[1]
 
         const templateParams = {
-          from_name: formData.fullName,
-          from_email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-          resume_name: file.name,
-          resume_content: base64File,
-        }
-
+          to_name: "Nome do Destinatário",
+          from_name: "Seu Nome",
+          message: "Mensagem de teste",
+          reply_to: "seuemail@exemplo.com"
+        };
+        
         await emailjs.send("service_1r2k5uh", "template_7k2zwrv", templateParams, "2X30L4ABzDnc_059e");
 
         setSuccessMessage("Currículo enviado com sucesso! Agradecemos sua candidatura.")
