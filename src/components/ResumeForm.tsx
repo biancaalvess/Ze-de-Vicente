@@ -1,8 +1,16 @@
-import type React from "react"
+"use client"
+
+import React from "react"
 import { useState } from "react"
 import { Upload } from "lucide-react"
-import emailjs from "@emailjs/browser"
-import type { FormData } from "../types"
+
+interface FormData {
+  fullName: string
+  email: string
+  phone: string
+  message: string
+  resume: File | null
+}
 
 export function ResumeForm() {
   const [formData, setFormData] = useState<FormData>({
@@ -15,53 +23,31 @@ export function ResumeForm() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [fileAttached, setFileAttached] = useState(false)
-  // adiciona um novo estado para a mensagem de sucesso
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("")
 
-  // modifica a função handleSubmit para definir a mensagem de sucesso
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    setSuccessMessage(
-      "Obrigado pela sua candidatura! Analisaremos seu currículo e entraremos em contato em breve."
-    );
-    setSubmitted(true);
-    
+
     try {
-      const file = formData.resume
-      if (!file) {
-        throw new Error("Nenhum arquivo selecionado")
+      const formDataToSend = new FormData()
+      formDataToSend.append("name", formData.fullName)
+      formDataToSend.append("email", formData.email)
+      formDataToSend.append("phone", formData.phone)
+      formDataToSend.append("message", formData.message)
+      if (formData.resume) {
+        formDataToSend.append("resume", formData.resume)
       }
 
-      const reader = new FileReader()
+      const response = await fetch("http://your-backend-url:3000/submit-resume", {
+        method: "POST",
+        body: formDataToSend,
+      })
 
-      reader.onload = async () => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const base64File = reader.result?.toString().split(",")[1]
-
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const templateParams = {
-          to_name: "Nome do Destinatário",
-          from_name: "Seu Nome",
-          message: "Mensagem de teste",
-          reply_to: "seuemail@exemplo.com"
-        };
-        
-
-        emailjs.send("service_lpxr4an", "template_7k2zwrv", {
-          to_name: "Caciano",
-          from_name: "Seu Nome",
-          message: "Mensagem de teste",
-          reply_to: "seuemail@exemplo.com",
-          attachment: "https://exemplo.com/curriculo.pdf" // Coloque o link correto do currículo
-        }, "2X30L4ABzDnc_059e")
-        .then(response => console.log("✅ E-mail enviado com sucesso!", response))
-        .catch(error => console.error("❌ Erro ao enviar e-mail:", error));
-        
-        
-
+      if (response.ok) {
         setSuccessMessage("Currículo enviado com sucesso! Agradecemos sua candidatura.")
-        // Limpa o formulário após o envio bem-sucedido
+        setSubmitted(true)
+        // Reset form
         setFormData({
           fullName: "",
           email: "",
@@ -70,9 +56,10 @@ export function ResumeForm() {
           resume: null,
         })
         setFileAttached(false)
+      } else {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Erro ao enviar o currículo")
       }
-
-      reader.readAsDataURL(file)
     } catch (error) {
       console.error("Erro:", error)
       setSuccessMessage("Erro ao enviar o currículo. Por favor, tente novamente.")
@@ -90,12 +77,18 @@ export function ResumeForm() {
         "application/msword",
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       ]
+      const maxSize = 20 * 1024 * 1024 // 20MB
 
       if (validTypes.includes(fileType)) {
-        setFormData((prev) => ({ ...prev, resume: file }))
-        setFileAttached(true)
+        if (file.size <= maxSize) {
+          setFormData((prev) => ({ ...prev, resume: file }))
+          setFileAttached(true)
+        } else {
+          alert("O arquivo é muito grande. Por favor, envie um arquivo de até 20MB.")
+          setFileAttached(false)
+        }
       } else {
-        alert("Por favor, envie um documento PDF ou Word")
+        alert("Por favor, envie um documento PDF ou Word (.doc, .docx)")
         setFileAttached(false)
       }
     } else {
@@ -219,7 +212,7 @@ export function ResumeForm() {
               </label>
               <p className="mt-2 sm:mt-0 sm:pl-1">ou arraste e solte</p>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">PDF ou Word até 10MB</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">PDF ou Word até 20MB</p>
           </div>
         </div>
         {fileAttached && (
@@ -236,7 +229,6 @@ export function ResumeForm() {
       >
         {loading ? "Enviando..." : "Enviar Candidatura"}
       </button>
-      {/*a exibição da mensagem de sucesso no JSX */}
       {successMessage && (
         <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">{successMessage}</div>
       )}
